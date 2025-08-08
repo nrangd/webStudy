@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07_HTML요소 선택하기</title>
+    <link rel="stylesheet" href="sheets/css07.css">
+</head>
+<body>
+    <h3># Document Object Model (DOM)</h3>
+
+    <ul>
+        <li>웹 브라우저가 HTML코드를 통해 해당 웹 페이지의 구조를 해석하여 생성해둔 객체</li>
+        <li>자바스크립트의 document 객체를 통해 해당 HTML요소에 접근할 수 있다</li>
+    </ul>
+
+    <h3># 원하는 HTML 요소를 선택하기 위한 메서드들</h3>
+
+    <ul>
+        <li>document.getElementById(id):
+            id로 HTML요소를 선택한다 (겹치는 아이디가 있어도 하나만 가져옴)</li>
+        <li>document.getElementsByTagName(tagName):
+            해당 태그이름을 가진 모든 HTML요소들을 선택한다 (배열 리턴)</li>
+        <li>document.getElementsByClasName(className):
+            해당 클래스 이름을 가진 모든 HTML요소들을 선택한다 (여러개 리턴)</li>
+        <li>document.querySelector(cssSelector): 
+            CSS 선택자를 사용해 원하는 요소를 하나만 선택한다</li>
+        <li>document.querySelectorAll(sccSelector):
+            CSS 선택자를 이용해 원하는 요소들을 여러개 선택한다</li>
+    </ul>
+
+    <h3># 선택한 HTML요소를 변경하기</h3>
+
+    <ul>
+        <li>element.innerHTML: 해당 요소의 내용을 변경한다 (태그 적용)</li>
+        <li>element.innerText: 해당 요소의 내용을 변경한다 (태그 미적용)</li>
+        <li>element.style: 스타일 속성을 변경한다</li>
+        <li>element.className: 클래스 속성을 변경한다</li>
+        <li>element.속성이름: 원하는 HTML속성을 변경한다</li>
+        <li>element.classList: 클래스 속성을 쉽게 변경할 수 있는 컬렉션을 사용한다</li>
+    </ul>
+
+    <h3># 선택한 HTML요소로 활용할수 있는 메서드들</h3>
+
+    <ul>
+        <li>element.click() : 클릭한 효과를 낼 수 있다</li>
+        <li>element.focus() : 해당 요소로 포커스를 이동한다</li>
+        <li>element.blur() : 해당 요소에서 포커스를 없앤다</li>
+        <li>element.getAttribute(name) : 해당 요소의 속성 값을 리턴한다</li>
+        <li>element.setAttribute(name, value) : 해당 요소의 속성 값을 설정한다.</li>
+        <li>element.removeAttribute(name)  : 해당 요소의 속성을 삭제한다.</li>
+        <li>element.addEventListener(event, callback) : 해당 요소에 원하는 이벤트를 설정한다</li>
+    </ul>
+
+    <img id="penguin_image">
+
+    <div id="menu_wrap">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div>이탈리안 BLT</div>
+        <div class="important bg-yellow">부대찌개</div>
+    </div>
+
+    <hr>
+
+    <h3>구구단</h3>
+
+    <div id="gugudan"></div>
+
+    <div id="gugudan2">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <!-- 자바스크립트만 사용하여 gugudan 내부에 2 ~ 9단의 구구단을 채워보기-->
+    <script>
+        const gugudan_div = document.getElementById('gugudan');
+        gugudan_div.style.display = 'flex';
+        gugudan_div.style.backgroundColor = 'aliceblue';
+        gugudan_div.style.borderRadius = '20px';
+        gugudan_div.style.padding = '20px';
+        gugudan_div.style.color = 'navy';
+        gugudan_div.style.border = '2px solid cornflowerblue';
+        for(let i = 2; i < 10; i++) {
+            
+            for(let j = 1; j < 10; j++) {
+                gugudan_div.innerHTML +=  i+'*'+j+ '='+i*j + "<br>";
+            }
+            if(i < 9) {
+                gugudan_div.innerHTML += "<hr>";
+            }
+        }
+    </script>
+
+    <!--같이 해본 예시-->
+
+    <script>
+        const gugudanDivs = document.querySelectorAll('#gugudan2 > div');
+
+        for (i = 0; i < gugudanDivs.length; i++) {
+            const guguDiv = gugudanDivs[i];
+
+            const dan = i + 2;
+
+            for (let gop = 1; gop <= 9; ++gop) {
+                // guguDiv.innerHTML += dan + 'X' + gop + '=' + dan * gop + '<br>';
+
+                //자바 스크립트의 format string
+                guguDiv.innerHTML += `${dan} x ${gop} = ${dan * gop}<br>`;
+            }
+        }
+    </script>
+
+    <script>
+        // 원하는 HTML요소를 선택해서 가져온 후에는 모든 속성을 자바스크립트로 가져올 수 있다
+        const penguin_image = document.getElementById('penguin_image');
+
+        // 어떤 속성이 있는지는 console.dir()을 통해 살펴 볼 수 있다.
+        console.dir(penguin_image);
+
+        // 해당 인스터스의 필드에 직접 접근하는 방식
+        penguin_image.src = '../css/images/penguin.jpg';
+        penguin_image.alt = '펭귄 그림';
+        penguin_image.width = '150';
+
+        //절대경로로 가져옴
+        console.log(penguin_image.src);
+        // 해당 인스턴스의 필드를 메서드로 다루는 방식
+        //상대경로로 가져옴
+        console.log('get attr:', penguin_image.getAttribute('src'));
+        penguin_image.setAttribute('src', '../css/images/apple.jpg');
+        penguin_image.removeAttribute('width');
+
+        penguin_image.style.width = '200px';
+
+        function clickAppleEventListener() {
+            console.log('  /)/)');
+            console.log('(   ..)');
+            console.log('(   >$)');
+        };
+
+        // penguin_iamge.addEventListener('click', () => {});
+        penguin_image.addEventListener('click', clickAppleEventListener);
+
+        let count = 1;
+        penguin_image.onclick = function () {
+            console.log("펭귄을", count ++, "번째로 눌렀습니다!");
+        };
+
+        const menu_wrap = document.getElementById('menu_wrap');
+        const menus = document.querySelectorAll('#menu_wrap > div');
+
+        console.log(menu_wrap);
+        console.dir(menu_wrap);
+        console.log(typeof menu_wrap);
+
+        console.log(menus);
+        console.dir(menus);
+
+        menus[0].innerHTML = '<b>안녕하세요!!</b>'; // 태그 적용됨 (보안 취약)
+        menus[1].innerText = '<b>hihi</b>'; // 태그가 적용되지 않음 (안전)
+
+        // 자바스크립트로 선택한 요소의 스타일을 변경할 수 있다
+        //- 가 있는 속성은 camelCase로 치환해주면된다
+        menus[2].innerText = '오늘의 메뉴';
+        menus[2].style.color = 'white';
+        menus[2].style.backgroundColor = 'peru';
+        menus[2].style.border = '3ps solid black';
+        menus[2].style.padding = '10px';
+        menus[2].style.fontSize = '30px';
+
+        // 나중에 원하는 클래스 값을 붙여서 스타일 시트의 효과를 받게 만들 수 있다.
+        menus[3].className = 'important';
+
+        //classList를 사용하면 클래스를 좀 더 쉽게 수정 할 수 있다
+        console.log(menus[4].classList);
+
+        menus[4].classList.remove('important');
+
+        // classList.remove(string, string, ...) : 지우고 싶은 클래스들을 지워준다
+        menus[4].classList.remove('important','bg-yellow');
+
+        // classList.add(string, ...) : 추가하고 싶은 클래스들을 추가해준다.
+        menus[4].classList.add('bg-blue', 'fa-beat');
+
+        // classList.toggle(string) : 있으면 없애고, 없으면 추가한다
+        menus[4].classList.toggle('on');
+        menus[4].classList.toggle('on');
+        
+    </script>
+</body>
+</html>

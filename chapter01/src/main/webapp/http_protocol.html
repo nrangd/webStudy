@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>http_protocol.html</title>
+</head>
+<body>
+    
+    <h3># 프로토콜 (Protocol)</h3>
+
+    <ul>
+        <li>통신 규약, 통신 규칙</li>
+        <li>컴퓨터들 간의 통신 절차를 정하고, 해당 절차에 이름을 붙여놓은 것</li>
+        <li>http, ftp, telnet, smtp, ... 등등</li>
+
+    </ul>
+
+    <h3># HTTP 프로토콜(http://)의 통신 절차</h3>
+
+    <ol>
+        <li>사용자(클라이언트)가 웹 브라우저의 주소창에 보고싶은 웹 페이지의 주소(url)를 입력한다
+            (링크를 클릭하는 것도 주소창에 url을 입력하는 것이나 다름없다)</li>
+        <li>웹 브라우저는 URL을 잘 해석하여 서버의 IP주소를 알아낸 뒤
+            그 IP주소를 통해 서버로 주소(요청, request)를 보낸다</li>
+        <li>요청을 받은 웹 서버는 클라이언트가 보낸 주소에 담겨있는 정보를 통해
+        	알맞은 웹페이지(또는 데이터)를 생성하여 응답(response)한다</li>
+        <li>요청을 보냈던 웹 브라우저는 서버로부터 도착한 응답을 받아
+            알맞게 해석하여 클라이언트에게 그려서 보여준다</li>
+    </ol>
+    
+    <h3># URL</h3>
+
+    <div>https://news.naver.com:443/newspaper/home</div>
+
+    <ul>
+        <li>https:// - 프로토콜을 적는 곳</li>
+        <li>news.naver.com - IP주소(또는 도메인 이름)를 적는 곳</li>
+        <li>:443 - 포트번호를 적는 곳이지만 잘 알려진 포트번호는 생략 가능</li>
+        <li>/newspaper/home - 원하는 자원이 무엇인지 적는 곳 (URI)</li>
+    </ul>
+
+    <h3># 프로토콜</h3>
+
+    <ul>
+        <li>URL에서 // 앞에 있는 것은 해당 URL이 어떤 프로토콜을 사용하여 통신하는지 나타내는 곳이다</li>
+        <li>해당 프로토콜의 잘 알려진 포트(well-known ports)들은 생략이 가능하다
+            (http - 80, https - 443번, ...)</li>
+    </ul>
+
+    <h3># IP주소</h3>
+
+    <ul>
+        <li>각 컴퓨터를 찾아가기 위한 주소</li>
+        <li>0.0.0.0 ~ 255.255.255.255까지 사용할 수 있다</li>
+        <li>혹시나 나중에 IP주소가 부족해질 경우에 대비하여 만들어놓은 IPv6도 있지만
+            아직 많이 사용하지는 않는다</li>
+        <li>URL의 //부터 첫 번째 /가 나오기 전까지는 IP주소를 적는 곳이다</li>
+        <li>IP주소 대시 news.naver.com 같은 것을 적기도 하는데
+            이는 IP주소를 대체할 수 있는 도메인 이름 서비스(Domain Name Service)이다</li>
+        <li>도메인 이름을 DNS서버에 전달하면 해당 도메인 이름에 해당하는 IP주소를 받을 수 있다</li>
+        <li>IP주소는 내부망에서만 사용할 수 있는 내부 IP주소(192.168.0.xxx)와
+            외부망에서도 접근할 수 있는 외부 IP주소가 있다</li>
+        <li>127.0.0.1은 현재 본인의 컴퓨터를 의미하는 루프백 IP주소이다</li>
+        <li>IP주소 부분에 localhost를 입력하는것도 본인의 컴퓨터를 의미하는 도메인 이름이다</li>
+    </ul>
+
+    <h3># DNS (Domain Name Service)</h3>
+
+    <ul>
+        <li>IP주소 자리에 IP주소 대신 사용할 수 있는 보기 좋은 이름</li>
+        <li>클라이언트가 도메인 이름을 사용해 요청을 보내는 경우
+            먼저 근처에 있는 DNS서버에 들러 해당 도메인을 IP주소로 치환한 후 요청을 보내게 된다</li>
+        <li>DNS 서버는 인터넷 서비스 제공자(ISP)들이 관리한다
+            (Google, KT, SKT, LG...)</li>
+    </ul>
+
+    <h3># 포트 번호</h3>
+
+    <ul>
+        <li>컴퓨터는 각 프로그램들이 통신 데이터를 전송 받기 위해 열어두고 기다리는 곳</li>
+        <li>포트번호는 0 ~ 65535번까지 사용할 수 있다</li>
+        <li>고정적으로 사용하는 잘 알려진 포트번호(well-known ports)들이 많이 존재한다</li>
+    </ul>
+
+    <h3># URI</h3>
+
+    <ul>
+        <li>URL에서 첫 번째 /이후에 나오는 모드 내용은 해당 서버에서 원하는 자원이 무엇인지 적는 곳이다</li>
+        <li>웹 서버는 URI에 담긴 정보를 잘 보고 어떤 페이지를 응답해줄지 결정하게 된다</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #click-box {
+            width: 500px; 
+            height: 500px; 
+            background-color: green; 
+            font-size: 30px; 
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .start, .restart {
+            width: 100px;
+            border-radius: 10px;
+            margin-top: 10px;
+            background-color: rgb(129, 182, 76);
+            color: white;
+        }
+        .start:hover, .restart:hover {
+            background-color: rgb(99, 165, 34);
+        }
+    </style>
+</head>
+<body>
+    <h3>반응속도 테스트</h3>
+
+    <div id="game-box">
+
+    </div>
+
+    <div id="click-box">
+        Ready
+        <div id="start" onclick="startTimer()" class="start">Start</div>
+    </div>
+    <div id="result"></div>
+    <button id="start-btn" onclick="startTimer()">시작</button>
+
+    <script>
+        const clickBox = document.getElementById('click-box');
+        const setRandomTime = () => parseInt(Math.random()* 2000 + 1000);
+
+        const setReadyBox = () => {
+            while(clickBox.firstChild) {
+                clickBox.firstChild.remove();
+            }
+            const readyForm = document.createElement('div');
+            const readyFromText = document.createTextNode('Retry');
+
+            readyForm.classList.add('restart');
+            readyForm.appendChild(readyFromText);
+            
+            clickBox.innerText = 'Try again?';
+            clickBox.appendChild(readyForm);
+        };
+        
+        let currTime = 0;
+
+        const state = {
+            ready: false,
+            startTime: 0,
+            endTime: 0,
+            takeTime() {
+                return this.endTime - this.startTime;
+            },
+        };
+        
+        // 시작시간
+        state.startTime = new Date().getTime();
+        console.log(state.startTime);
+
+        clickBox.addEventListener('click', e => {
+            if(e.currentTarget != e.target) {
+                return;
+            }
+
+            // 버튼 클릭시 끝나는 시간 갱신
+            state.endTime = new Date().getTime();
+            console.log(state.endTime);
+
+            if(state.ready) {
+                // alert(`${state.takeTime()} ms`);
+                clickBox.style.backgroundColor = 'aqua';
+                clickBox.innerText = `${state.takeTime()} ms`;
+            } else {
+                alert('너무 빨랐습니다');
+                clearTimeout(currTime);
+                // clickBox.style.backgroundColor = 'green';
+                // clickBox.innerText = 'Ready';
+                setReadyBox();
+            }
+
+            state.ready = false;
+        });
+
+        function startTimer() {
+            currTime = window.setTimeout(e => {
+                state.startTime = new Date().getTime();
+                state.ready = true;
+                clickBox.style.backgroundColor = 'aqua';
+                clickBox.innerText = 'Click!';
+
+            }, setRandomTime());
+        }
+    </script>
+</body>
+</html>

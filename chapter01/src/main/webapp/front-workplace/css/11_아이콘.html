@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11_아이콘</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=settings" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names,groups,group" />
+    <script src="https://kit.fontawesome.com/e59aae9fd9.js" crossorigin="anonymous"></script>
+    <style>
+        .pulse {
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                font-variation-settings: 'wght' 100;
+            }
+            50% {
+                font-variation-settings: 'wght' 700;
+            }
+            100% {
+                font-variation-settings: 'wght' 100;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <h3># Icon CDN</h3>
+
+    <ul>
+        <li>google Icon</li>
+        <li>font-awesome Icon</li>
+        <li>아이콘은 실제로 글꼴을 활용하기 때문에
+            font-size와 color를 통해 크기와 색을 변경할 수 있다</li>
+    </ul>
+
+    
+    <span class="material-symbols-outlined" 
+          style="color: orange; font-size: 55px;">
+        settings
+    </span>
+    <div style="font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48;">
+        <span class="material-symbols-rounded pulse">
+            person
+        </span>
+    
+        <span class="material-symbols-rounded">
+            group
+        </span>
+    
+        <span class="material-symbols-rounded">
+            groups
+        </span>
+    </div>
+    <div style="font-size: 50px; color: slateblue;">
+        <i class="fa-solid fa-file"></i>
+        <i class="fa-solid fa-thumbs-up"></i>
+        <i class="fa-solid fa-image"></i>
+        <i class="fa-solid fa-file"></i>
+        <i class="fa-solid fa-file"></i>
+        <i class="fa-solid fa-file"></i>
+    </div>
+
+    <div class="fa-3x">
+        <i class="fa-solid fa-circle-plus fa-beat"></i>
+        <i class="fa-solid fa-heart fa-beat"></i>
+        <i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s;"></i>
+        <i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 2s;"></i>
+        <i class="fa-solid fa-heart fa-beat" style="--fa-beat-scale: 2.0;"></i>
+    </div>
+</body>
+</html>

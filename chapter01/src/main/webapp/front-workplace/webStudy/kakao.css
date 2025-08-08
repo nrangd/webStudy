@@ -1,0 +1,115 @@
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.service {
+    margin: 50px auto 0;
+    width: 800px;
+}
+.service > h3::before {
+    background-image: url(images/apple.jpg) ;
+    background-size: 43px 42px;
+    width: 43px;
+    height: 42px;
+    display: inline-block;
+    content: "";
+    margin-right: 10px;
+}
+
+.box {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: bold;
+}
+
+.box > div {
+    box-sizing: border-box;
+    padding: 30px;
+    flex: 1 1 40%;
+    margin: 5px;
+    background-color: antiquewhite;
+    border-radius: 10px;
+}
+
+.box > div > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.box-in-ul {
+    display: flex;
+}
+.box-in-ul > li {
+    margin-right: 5px;
+}
+.box-in-ul > li > a {
+    background-image: url(images/apple.jpg);
+    background-size: 2.0em 2.0em;
+    border-radius: 10px;
+    display: block;
+    width: 2.0em;
+    height: 2.0em;
+}
+
+.service-all > a {
+    width: fit-content;
+    padding: 10px 20px;
+    margin: 0px auto;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    display: flex;
+    text-decoration: none;
+    color: black;
+}
+
+.service-all > a::after {
+    background-image: url(images/apple.jpg);
+    background-size: 1.5em 1.5em;
+    border-radius: 10px;
+    width: 1.5em;
+    height: 1.5em;
+    content: "";
+}
+
+@media screen and (max-width: 1200px) {
+    .service {
+        width: 800px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .service {
+        width: 700px;
+    }
+
+    .box-in-ul > li:nth-of-type(3) {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .service {
+        width: 600px;
+    }
+
+    .box-in-ul > li:nth-of-type(3) {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .service {
+        width : 300px;
+    }
+
+    .service > h3 {
+        font-size: 18px;
+    }
+
+    .service > h3::before {
+        display: none;
+    }
+}

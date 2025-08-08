@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Time Test</title>
+    <link rel="stylesheet" href="assets/cs/react_test.css">
+</head>
+<body>
+    <div>
+        <h1>반응속도 테스트 - 프로그래머 평균 150ms</h1>
+        <div id="progress-bar" style="text-align: center; background-color: aqua; width: 80%; margin: 0 auto; border-radius: 5px; padding: 5px 5px 2px 5px; margin-bottom: 10px;">
+            <span id = "progress-bar-text">0 / 5</span>
+            <div id="progress-bar-in" style="background-color: blue; transition: 0.3s ease-in-out; margin-bottom: 5px; border-radius: 5px; width: 1%; height: 10px;"></div>
+        </div>
+    </div>
+    
+    <div id="main">
+        <!-- 아래의 div요소가 있어야 작동함 -->
+        <div></div>
+    </div>
+
+    <!-- ready화면은 자바스크립트에서 구현함 -->
+
+    <div id = "test-wait">
+        <div class="wait-message">
+            <div class="text">Wait...</div>
+            <div class="icon"></div>
+        </div>
+    </div>
+
+    <div id = "test-wait-click">
+        <div class="wait-message">
+            <div class="text">Click!</div>
+            <div class="icon"></div>
+        </div>
+    </div>
+
+    <div id = "test-clicked">
+        <div class="label">Tour reaction time :</div>
+        <div class="record">
+            <div class="icon"></div>
+            <div class="millisec">300 ms</div>
+        </div>
+    </div>
+
+    <div id="test-record">
+        <div class="title">
+            <div class="icon"></div>
+            <div class="title-text">Final Results</div>
+            <div class="icon"></div>
+        </div>
+        <div class="records">
+            <div class="avg-time">
+                <div class="label">Average time:</div>
+                <div class="icon"></div>
+                <div class="millisec">300ms</div>
+            </div>
+            <div class="best-time">
+                <div class="label">Best time:</div>
+                <div class="icon"></div>
+                <div class="millisec">280ms</div>
+            </div>
+            <div class="worst-time">
+                <div class="label">Worst time:</div>
+                <div class="icon"></div>
+                <div class="millisec">330ms</div>
+            </div>
+            <div id="restart-button" class="try-again-button">
+                Try Again
+            </div>
+        </div>
+        
+    </div>
+
+    <script src = "assets/js/react_test.js"></script>
+</body>
+</html>

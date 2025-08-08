@@ -1,0 +1,203 @@
+.flex-box {
+    display:flex;
+    background-color: skyblue;
+    padding: 5px;
+    user-select: none;
+    margin-bottom: 10px;
+}
+.flex-box > * {
+    background-color: rgb(75, 187, 231);
+    width: 100px;
+    min-width: 90px;
+    height: 100px;
+    font-size: 30px;
+    text-align: center;
+    line-height: 100px;
+    margin: 5px;
+}
+.flex-direction-row {
+    flex-direction: row;
+}
+
+.flex-direction-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.flex-direction-column {
+    flex-direction: column;
+    height: 500px;
+}
+
+.flex-direction-column-reverse {
+    flex-direction: column-reverse;
+}
+
+#mywebsite {
+    width: 800px;
+    font-size: 20px;
+    color: white;
+}
+
+#mywebsite > header {
+    background-color: darkred;
+    height: 150px;
+    color: white;
+}
+
+#mywebsite > nav {
+    background-color: darkslateblue;
+    height: 100px;
+    display: flex;
+    padding: 5px;
+}
+
+#mywebsite > nav > div {
+    background-color: rgb(101, 92, 161);
+    margin: 5px;
+    width: 90px;
+}
+
+#mywebsite > main {
+    display: flex;
+    /* height: 600px; */
+    background-color: darkgray;
+}
+
+#mywebsite > main > #newsstand {
+    background-color: darkgray;
+    width: 80%;
+}
+
+#newsstand > article {
+    background-color: gold;
+}
+
+#newsstand > section {
+    background-color: darkblue;
+}
+
+#mywebsite > main > aside {
+    background-color: darkolivegreen;
+    width: 20%;
+}
+
+#mywebsite > footer {
+    background-color: darkgoldenrod;
+    height: 100px;
+}
+
+
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.content-header > ul {
+    display: flex;
+    background-color: white;
+}
+.content-header > ul > li {
+    color:black;
+}
+.content-header > ul > li > a {
+    color:gray;
+    text-decoration: none;
+    cursor: pointer;
+}
+.content-header > ul > li:first-of-type > a:last-child::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    margin:0 5px;
+    background-color: gray;
+    vertical-align: 5px;
+}
+.content-header > ul > li:nth-of-type(n+2)::before {
+    content: "/";
+    margin:0 5px;
+    color: gray;
+    /* display: block;
+    position: absolute;
+    top: 4px;
+    left: 13px;
+    width: 1px;
+    height: 15px;
+    background-color: antiquewhite;
+    transform: skewX(-15deg); */
+}
+
+.content-header > ul > li:nth-of-type(3) > a {
+    color: black;
+}
+
+.content-header-sub {
+    margin:0 12px;
+    padding: 10px;
+    background-color: gray;
+    display: flex;
+    font-size: 0.7em;
+}
+.content-sub-tab {
+    flex: 1;
+}
+.content-sub-tab > ul {
+    display: flex;
+    background-color: white;
+}
+.content-sub-tab > ul > li {
+    color:black;
+}
+.content-sub-tab > ul > li > a {
+    color:gray;
+    text-decoration: none;
+    cursor: pointer;
+}
+.content-sub-tab > ul > li:nth-of-type(n+2)::before {
+    content: "/";
+    margin:0 5px;
+    color: gray;
+}
+
+.content-sub-home {
+    font-weight: bold;
+    color: black;
+}
+
+.media-aria {
+    margin: 0 12px;
+    display: flex;
+}
+
+/* 
+.media-aria > div {
+    flex: 1;
+}
+
+.media-aria > div:first-of-type {
+    margin-right: 10px;
+} */
+
+.media-contents {
+    flex: 1;
+}
+
+.media-contents:first-of-type {
+    margin-right: 20px;
+}
+
+.media-contents > ul {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 100%;
+}
+.media-contents > ul:first-of-type > li {
+    height: 50%;
+}
+.media-contents > ul > li {
+    color:black;
+}

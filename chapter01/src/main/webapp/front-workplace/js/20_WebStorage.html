@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20_WebStorage</title>
+</head>
+<body>
+    <h3># Web Storage API</h3>
+
+    <ul>
+        <li>자바스크립트로 웹 브라우저에 데이터를 보관할 수 있는 공간</li>
+        <li>데이터를 key/value 형태로 보관해놓을 수 있다</li>
+        <li>로컬 스토리지와 세션 스토리지가 있다</li>
+        <li>로컬 스토리지는 웹 브라우저를 종료하더라도 데이터가 쭉 유지된다</li>
+        <li>세션 스토리지는 웹 브라우저가 켜져 있는 동안만 데이터가 유지된다</li>
+        <li>데이터는 문자열 형태로 저장된다</li>
+    </ul>
+
+    <script>
+        // 데이터 저장하기
+
+        window.localStorage.setItem('score', 30000);
+        window.localStorage.setItem('nickname', '빽사이즈 아메리카노');
+
+        // Javascript Object를 문자열 형태로 변환하여 보관하기 위해서
+        // 오브젝트를 JSON 형태의 문자열로 변환을 해야 한다
+        let jsonStr = JSON.stringify({
+            name: '홍길동',
+            age: 10,
+            score: 500
+        });
+        window.localStorage.setItem('userInfo', jsonStr);
+
+        window.sessionStorage.setItem('login', true);
+        window.sessionStorage.setItem('lastAccessTime', Number(new Date()));
+
+        // 데이터 꺼내기 (꺼낸 데이터는 무조건 string 타입이다)
+        console.log(window.localStorage.getItem('username'));
+        console.log(window.localStorage.getItem('nickname'));
+
+        // JSON 형식의 데이터 꺼내기
+        console.log(jsonStr = window.localStorage.getItem('userInfo'));
+
+        // JSON -> Object
+        const obj = JSON.parse(jsonStr);
+
+        for (key in obj) {
+            console.log(`${key}: ${obj[key]}`);
+        }
+
+        console.log(typeof window.sessionStorage.getItem('login'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09_문자열</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+        #out {
+            background-color: black;
+            color: lime;
+            padding: 10px;
+            letter-spacing: 10px;
+            font-size: 1.2em;
+            min-height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div># 문자열 다루기</div>
+
+    <div id="out"></div>
+
+    <script>
+        const out = document.getElementById('out');
+
+        const println = str => out.innerHTML += `<div>${str}</div>`;
+
+        const fruits = 'banana/kiwi/orange/gyul/sagwa/bae';
+
+        // 자바스크립트는 문자열의 한 문자에 배열처럼 접근할 수 있다
+        println(fruits[0]);
+
+        println('len: ' + fruits.length);
+        println('문자열 더하기: ' + 123 + 'abc');
+
+        for(let i = 0; i  < fruits.length; i++) {
+            println(fruits[i]);
+        }
+
+        // split(sep): 문자열을 원하는 기준으로 분할해서 배열로 리턴
+        const fruitArr = fruits.split('/');
+
+        for (fruit of fruitArr) {
+            println(fruit);
+        }
+
+        const foundIndex = fruits.indexOf('kiwi');
+
+        println(fruits + '에서');
+        println('kiwi의 위치: ' + foundIndex);
+
+        // toUpperCase(), toLowerCase()
+        const foundIndex2 = fruits.indexOf('SAGWA'.toLowerCase());
+        println(foundIndex2);
+        
+        // 자바스크립트에서는 Escape문자가 먹힌다
+        console.log('Hello\nooooo');
+        println('Hello\nooooo');
+
+        // 웹 브라우저에서도 이모지를 지원하고 vscode에서도 이모지를 지원하기 때문에
+        // 요즘은 코드값을 몰라도 그냥 이모지를 사용할 수 있다
+        println('😊');
+        println('😂');
+        println('😁');
+        println('\u{1F921}');   // \u{1F921} 유니코드 값을 알때 사용하는 방법
+
+        // 자바스크립트에서 문자의 코드값 확인하기
+        println('👍'.codePointAt());
+        println('👍'.codePointAt().toString(16));   // 16진수로 확인하기
+        println('\u{1f44d}');
+
+        // subString(): 시작인덱스(이상)와 끝의인덱스(미만)를 받아서 자른다
+        println(fruits.substring(5)) // 5부터 끝까지
+        println(fruits.substring(10, 15));  // 10부터 14까지
+
+        // slice(): subString()과 비슷하나 인덱스가 음수로도 가능하다  
+        println(fruits.slice());
+        println(fruits.slice(5));
+        println(fruits.slice(10, 15));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+div {
+    border:solid 3px black;
+    height: 200px;
+    margin-bottom: 50px;
+}
+
+div:first-of-type {
+    background-image: url("../images/apple.jpg");
+
+    /*
+        # background-size
+
+        설정 안함 : 원본 이미지 크기를 그대로 사용한다
+        직접 설정 : 너비 높이
+        contain : 해당 요소안에 이미지가 모두 포함될 수 있는 크기로 설정
+        cover : 이미지로 해당 요소를 모두 덮을 수 있는 크기로 설정
+    */
+    background-size: 50px 50px;
+
+    /*
+        # background-repeat
+
+        repeat : 반복하기 (기본값)
+        repeat-x : 가로로만 반복하기
+        repeat-y : 세로로만 반복하기
+        no-repeat: 반복 안함
+    */
+    background-repeat: repeat-x;
+
+    /*
+        # backgfond-position
+
+        직접 설정: x축 y축;
+        center, top, bottom, left, right를 모두 조합하여 사용할 수 있다.
+    */
+    background-position: center;
+}
+
+/* div:nth-of-type(2){
+    border: 0px;
+    margin: 0px auto;
+    background-color: aliceblue;
+    background-image: url("../images/WOTW-logo.png");
+    background-size: 400px auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+div:nth-of-type(3){
+    height: 300px;
+    background-color: darkslateblue;
+    background-image: url("../images/WOTW-trailer-768x589.png");
+    background-size: 400px auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+
+}
+
+div:nth-of-type(4){
+    height: 400px;
+    background-color: dimgrey;
+    background-image: url("../images/bkg-moki_6213b633.png");
+    background-size: 400px auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+
+} */
+
+#cafe-button {
+    background: url("../images/sp_main.png") no-repeat;
+    background-position: -80px -440px;
+    /* background-size: 468px 456px; */
+    
+    border:none;
+    box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+    background-color: beige;
+}

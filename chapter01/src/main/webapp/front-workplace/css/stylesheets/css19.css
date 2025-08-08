@@ -1,0 +1,45 @@
+#hello {
+    color: red;
+    font-size: 50px;
+}
+
+@media screen and (max-width: 1200px) {
+    #hello {
+        color: blue;
+    }
+}
+
+@media screen and (max-width:600px) {
+    #hello {
+        color: green;
+    }
+}
+
+@media print {
+    #hello {
+        color: purple;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    #hello {
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    #hello {
+        font-size:30px;
+    }
+}
+
+#menu_div {
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 550px) {
+    #menu_div {
+        flex-direction: column;
+    }
+}

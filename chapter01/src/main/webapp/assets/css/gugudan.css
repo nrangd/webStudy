@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+}
+
+#gugudan2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+#gugudan3 {
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+	width: 900px;
+	text-align: center;
+}
+
+#gugudan3 > .title {
+	padding: 5px;
+	background-color: beige;
+}
+
+#gugudan3 > .data {
+	padding: 5px;
+	background-color: olive;
+}

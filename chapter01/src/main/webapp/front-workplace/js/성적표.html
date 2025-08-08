@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    
+    <script>
+        /*
+            (1) 학번, 이름, 국어, 영어, 수학, 수업 만족도(별 0 ~ 5)를 가진
+                학생 100명의 자바스크립트 오브젝트(json)를 정보를 랜덤으로 생성하기
+            
+            (2) 모든 학생들의 정보를 HTML에 테이블 형태로 출력하기
+                (60점 미만인 점수는 빨간 글씨로 출력하기, 학생들의 수업 만족도는 별의 개수로 출력하기)
+
+            (3) 모든 학생들의 평균 점수를 HTML에 테이블 형태로 출력하기
+
+            (4) 수학 점수가 60점 미만인 학생들로 이루어진 테이블 HTML에 출력하기
+
+            (5) 2번의 마지막 행에는 각 열의 총합과 평균을 출력하기 (학번, 이름 열 제외)
+        */
+        const randomScore = () => Math.floor(Math.random() * 101);
+        const randomStar = () => Math.floor(Math.random() * 6);
+        const randomName = () => 'temp';
+        const randomNum = () => 0;
+
+        const randomStudent = () => ({stuNum: randomNum(), stuName: randomName(), kor: randomScore(), eng: randomScore(), math: randomScore, star: randomStar()});
+
+        const tr = str => `\n<tr>\n\t${str}\n</tr>`;
+        const td = str => `\n<td>\n\t${str}\n</td>`;
+        const th = str => `\n<th>\n\t${str}\n</th>`;
+        
+        const body = document.querySelector('body');
+        const bodyTable = str => body.innerHTML+=`\n<table>${str}</table>`;
+
+        bodyTable(tr(td('test')));
+        bodyTable(tr(td('test2')));
+
+    </script>
+</body>
+</html>

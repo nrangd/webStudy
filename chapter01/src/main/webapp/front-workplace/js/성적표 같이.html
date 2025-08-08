@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성적표</title>
+
+    <style>
+        body {
+            display: flex;
+        }
+        table, tr, td, th {
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: 0;
+        }
+
+        th {
+            background-color: peru;
+        }
+
+        td.name {
+            font-style: italic;
+            padding: 8px;
+            text-align: center;
+        }
+
+        caption::before {
+            content: "<<";
+        }
+
+        caption::after {
+            content: ">>";
+        }
+
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <table id = "basic_info_table">
+        <caption>기본 학생 정보</caption>
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <table id ="avg_info_table">
+        <caption>평균 점수 정보</caption>
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <table id ="math_failure_table">
+        <caption>수학 낙제자</caption>
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        /*
+
+        (1) 학번, 이름, 국어, 영어, 수학, 수업 만족도(별 0 ~ 5)를 가진
+                학생 100명의 자바스크립트 오브젝트(json)를 정보를 랜덤으로 생성하기
+        
+        */
+        const names1 = [
+        "김", "이", "박", "최", "정", "강", "조", "윤", "장", "임",
+        "오", "한", "신", "서", "권", "황", "안", "송", "류", "홍"
+        ];
+
+        const names2 = [
+        "민준", "서연", "예준", "지우", "하윤", "도윤", "수빈", "지민",
+        "서윤", "은우", "하늘", "지현", "유진", "예림", "현우", "세진",
+        "태윤", "지안", "나연", "시우"
+        ];
+
+        let stu_count = 0;
+
+        const getRandomNameFrag = candidates => candidates[parseInt(Math.random() * candidates.length)];
+
+        const getRandomName = () => getRandomNameFrag(names1) + getRandomNameFrag(names2);
+
+        const getPaddedNum = (num, size) => {
+            let paddedResult = num.toString();
+            
+            for(let i = num.toString().length; i < size; i++) {
+                paddedResult = '0' + paddedResult;
+            }
+
+            // console.log(`숫자가 ${num}이고 원하는 크기가 ${size}일때 0을 채운 결과는 ${paddedResult}`);
+
+            return paddedResult;
+        };
+
+        // getPaddedNum(12345, 8);
+
+        const getStuNum = () => `STU${getPaddedNum(stu_count++, 8)}`;
+
+        const getRandomScore = () => Math.floor(Math.random() * 101);
+        const getRandomStar = () => parseInt(Math.random() * 6);
+
+        const stus = []
+
+        for (let i = 0; i < 100; i++) {
+            stus.push({
+                id: getStuNum(),
+                name: getRandomName(),
+                kor: getRandomScore(),
+                eng: getRandomScore(),
+                math: getRandomScore(),
+                star: getRandomStar(),
+            });
+        }
+
+        console.log(stus);
+
+        /*
+
+         (2) 모든 학생들의 정보를 HTML에 테이블 형태로 출력하기
+                (60점 미만인 점수는 빨간 글씨로 출력하기, 학생들의 수업 만족도는 별의 개수로 출력하기)
+        
+        */
+
+        const addRow = (tableId, data, part) => {
+            const toAdd = document.querySelector(`#${tableId} > ${part}`);
+
+            let row = '<tr>';
+
+            if (part === 'thead') {
+                for (key in data) {
+                    row += `<th class='${key}'>${key}</th>`;
+                }
+            } else {
+                for (key in data) {
+                    if (key === 'math' || key === 'eng' || key === 'kor') {
+                        const score = data[key];
+                        row += `<td class='${key} ${score < 60 ? 'red' : ''}'>${score}</td>`;
+                    } else if(key === 'star') {
+                        const starLen = data[key];
+                        row += `<td class='${key}'>`;
+                        // 별이 추가되는 위치
+                        for (let i = 0; i < starLen; ++i) {
+                            row += '★';
+                        }
+                        for (let i = starLen; i < 5; ++i) {
+                            row += '☆';
+                        }
+                        // 끝
+                        row += '</td>';
+                    } else {
+                        row += `<td class='${key}'>${data[key]}</td>`;
+                    }
+                }
+            }
+
+            row += '</tr>';
+            toAdd.innerHTML += row;
+        };
+
+        const addBodyRow = (tableId, stu) => addRow(tableId, stu, 'tbody');
+        const addHeadRow = (tableId,stu) => addRow(tableId, stu, 'thead');
+
+        stus.forEach((stu,index) => {
+            const tableId = 'basic_info_table';
+            if (index == 0) {
+                addHeadRow(tableId, stu);
+            }
+            addBodyRow(tableId, stu)
+        });
+
+
+        // (3) 모든 학생들의 평균 점수를 HTML에 테이블 형태로 출력하기
+
+
+        stus.map(stu => ({
+            학번: stu.id,
+            이름: stu.name,
+            평균점수: Math.round((stu.kor + stu.eng + stu.math) / 3 * 100) / 100
+            }))
+            .forEach((stu, index) => {
+                const tableId = 'avg_info_table';
+                if (index == 0) {
+                    addHeadRow(tableId, stu);
+                }
+                addBodyRow(tableId, stu);
+            });
+
+        /*
+
+            (4) 수학 점수가 60점 미만인 학생들로 이루어진 테이블 HTML에 출력하기
+
+        */
+
+        stus.filter(stu => stu.math < 60)
+        .map(stu => ({
+            학번: stu.id,
+            낙제자: stu.name,
+            수학점수: stu.math
+        }))
+        .forEach((stu, index) => {
+            const tableId = 'math_failure_table';
+
+            if (index == 0) {
+                addHeadRow(tableId, stu);
+            }
+            addBodyRow(tableId, stu);
+        });
+
+        /*
+        
+            (5) 2번의 마지막 행에는 각 열의 총합과 평균을 출력하기 (학번, 이름 열 제외)
+
+        */
+        document.querySelector('#basic_info_table > tbody')
+            .innerHTML += `<tr>
+                <td colspan="2">총합</td>
+                <td>${stus.reduce((acc, curr) => acc + curr.kor, 0)}</td>
+                <td>${stus.reduce((acc, curr) => acc + curr.eng, 0)}</td>
+                <td>${stus.reduce((acc, curr) => acc + curr.math, 0)}</td>
+                <td>${stus.reduce((acc, curr) => acc + curr.star, 0)}</td>
+            </tr>
+            <tr>
+                <td colspan="2">평균</td>
+                <td>${stus.reduce((acc, curr) => acc + curr.kor, 0) / stus.length}</td>
+                <td>${stus.reduce((acc, curr) => acc + curr.eng, 0) / stus.length}</td>
+                <td>${stus.reduce((acc, curr) => acc + curr.math, 0) / stus.length}</td>
+                <td>${stus.reduce((acc, curr) => acc + curr.star, 0) / stus.length}</td>
+            </tr>`;
+    </script>
+</body>
+</html>

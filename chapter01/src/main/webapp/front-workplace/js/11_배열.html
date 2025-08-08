@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11_배열</title>
+</head>
+<body>
+    <h3># 자바스크립트 스타일로 배열 다루기</h3>
+
+    <p>F12</p>
+
+    <script>
+        // 빈 배열 만들기
+        const drinks = [];
+        
+        // const로 배열을 선언하더라도 내용은 변경이 가능하다
+        drinks[0] = 'orange juice';
+        drinks[1] = 'sprite';
+
+        // const이기 때문에 drinks 자체를 새로운 배열로 변경하는 것은 불가능하다
+        // drinks = ['orange juice', 'sprite'];
+
+        console.log(drinks);
+        console.log(drinks.toString());
+
+        // 배열에 값 추가/삭제하는 메서드들 : push, pop, shift, unshift
+        drinks.push('coke', 'caffe latte', 'americano');
+        console.log(drinks);
+
+        // pop: 배열 맨 뒤의 값 꺼내기 (삭제됨)
+        console.log('popped:', drinks.pop());
+        console.log(drinks);
+
+        // shift: 배열 맨 앞의 값 꺼내기 (삭제됨)
+        console.log('shifted:', drinks.shift('choco latte'));
+        // unshift: 배열 맨 앞의 값 추가하기
+        console.log(drinks.unshift('choco lattte', 'banila latte'));
+
+        // 배열 앞에 ...을 붙이면 배열을 풀어서 매개변수로 전달하게된다.
+        console.log(...drinks);
+
+        const items = ['sword', 'shield', 'fork', ...drinks];
+        console.log(items);
+
+        // 배열 복사? (얕은 복사)
+        const drinks2 = drinks;
+
+        drinks[3] = '인절미';
+
+        console.log(drinks[3]);
+        console.log(drinks);
+
+        // 깊은 복사
+        const drinks3 = [...drinks];
+
+        drinks3[2] = '람보르기니';
+
+        console.log(drinks3);
+        console.log(drinks[2]);
+        console.log(drinks);
+
+        // includes
+        console.log('환타있나요?', drinks.includes('환타'));
+
+        // sort: 기본적으로 사전순으로 정렬을 하므로 다른 기준을 원한다면
+        //          직접 Comparator를 정의해야 한다.
+        const numbers = [1, -5, 99, 123, 12343243, -888, 15];
+
+        function compareFn(left, right) {
+            return left - right;
+        }
+
+        numbers.sort(compareFn);
+        console.log(numbers);
+
+        numbers.length = 0;
+        // 연습: 1 ~ 100 범위의 랜덤 숫자 200개를 배열에 추가한 후 내림차순으로 정렬해보기
+        for(let i = 0; i < 200; i++) {
+            numbers[i] = parseInt(Math.random() * 100 + 1);
+        }
+
+        // function compareFn2(left, right) {
+        //     return right - left;
+        // }
+
+        // numbers.sort(compareFn2);
+        numbers.sort((a,b) => b - a);
+        console.log(numbers);
+
+        // 연습2: 각 숫자의 개수를 세고 가장 많이 나온 숫자 순으로 정렬하여 출력해보기
+        
+        // let numCnt = [];
+        // for(i = 0; i < 100; i++) {
+        //     numCnt[i] = 0;
+        // }
+        // for(i = 0; i < numbers.length; i++) {
+        //     for(let j = 0; j < 100; j++){
+        //         if(numbers[i] == j) {
+        //             numCnt[j]++;
+        //         }
+        //     }
+        // }
+
+        // console.log(numCnt);
+
+        // function compareFn3(left, right) {
+        //     return numCnt[left - 1] - numCnt[right - 1];
+        // }
+
+        // console.log(numbers.sort(compareFn3));
+
+        // 같이해봄 
+        const numCount = [];
+
+        // 오브젝트에 숫자를 저장
+        for (let i = 0; i < 100; i++) {
+            numCount[i] = {
+                num: i + 1,
+                count: 0,
+            };
+        }
+
+        // 횟수 세기
+        for (i = 0; i < numbers.length; i++) {
+            const n = numbers[i];
+
+            numCount[n - 1].count++;
+        }
+
+        // 각 오브젝트에 저장된 숫자의 등장횟수를 기준으로 정렬
+        numCount.sort((a,b) => {
+            return b.count - a.count;
+        });
+
+        console.log(numCount);
+    </script>
+</body>
+</html>

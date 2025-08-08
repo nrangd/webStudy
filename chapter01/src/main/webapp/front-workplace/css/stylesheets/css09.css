@@ -1,0 +1,30 @@
+[id^="shadow"] {
+    font-size: 30px;
+    padding: 5px;
+}
+
+#shadow1 {
+    font-size: 30px;
+    padding: 5px;
+    color: white;
+    text-shadow: 0 3px 10px black;
+}
+
+#shadow2 {
+    color: white;
+    text-shadow: 1px 1px 3px black,
+                 2px 2px 5px red,
+                 3px 3px 10px blue;
+}
+
+#shadow4 {
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px;
+
+    box-shadow: 1px 1px 3px black,
+                 2px 2px 5px red,
+                 3px 3px 10px blue;
+    margin: 50px;
+    background-color: beige;
+}

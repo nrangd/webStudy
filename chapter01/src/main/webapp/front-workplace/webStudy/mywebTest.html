@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/e59aae9fd9.js" crossorigin="anonymous"></script>
+    <style>
+        #mywebsite {
+            width: 800px;
+            font-size: 20px;
+            color: white;
+        }
+
+        #mywebsite > header {
+            background-color: darkred;
+            height: 150px;
+            color: white;
+        }
+
+        #mywebsite > nav {
+            background-color: darkslateblue;
+            height: 100px;
+            display: flex;
+            padding: 5px;
+        }
+
+        #mywebsite > nav > div {
+            background-color: rgb(101, 92, 161);
+            margin: 5px;
+            width: 90px;
+        }
+
+        #mywebsite > main {
+            display: flex;
+            /* height: 600px; */
+            background-color: darkgray;
+        }
+
+        #mywebsite > main > #newsstand {
+            background-color: darkgray;
+            width: 80%;
+        }
+
+        #newsstand > article {
+            background-color: gold;
+            height: 85%;
+        }
+
+        #newsstand > section {
+            background-color: darkblue;
+            height: 15%;
+        }
+
+        #mywebsite > main > aside {
+            background-color: darkolivegreen;
+            width: 20%;
+        }
+
+        #mywebsite > footer {
+            background-color: darkgoldenrod;
+            height: 100px;
+        }
+
+
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content-header > ul {
+            display: flex;
+            background-color: white;
+        }
+        .content-header > ul > li {
+            color:black;
+        }
+        .content-header > ul > li > a {
+            color:gray;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .content-header > ul > li:first-of-type > a:last-child::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            margin:0 5px;
+            background-color: gray;
+            vertical-align: 5px;
+        }
+        .content-header > ul > li:nth-of-type(n+2)::before {
+            content: "/";
+            margin:0 5px;
+            color: gray;
+            /* display: block;
+            position: absolute;
+            top: 4px;
+            left: 13px;
+            width: 1px;
+            height: 15px;
+            background-color: antiquewhite;
+            transform: skewX(-15deg); */
+        }
+
+        .content-header > ul > li:nth-of-type(3) > a {
+            color: black;
+        }
+
+        .content-header-sub {
+            margin:0 12px;
+            padding: 10px;
+            background-color: gray;
+            display: flex;
+            font-size: 0.7em;
+        }
+        .content-sub-tab {
+            flex: 1;
+        }
+        .content-sub-tab > ul {
+            display: flex;
+            background-color: white;
+        }
+        .content-sub-tab > ul > li {
+            color:black;
+        }
+        .content-sub-tab > ul > li > a {
+            color:gray;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .content-sub-tab > ul > li:nth-of-type(n+2)::before {
+            content: "/";
+            margin:0 5px;
+            color: gray;
+        }
+
+        .content-sub-home {
+            font-weight: bold;
+            color: black;
+        }
+
+        .media-aria {
+            margin: 0 12px;
+            display: flex;
+        }
+
+        /* 
+        .media-aria > div {
+            flex: 1;
+        }
+
+        .media-aria > div:first-of-type {
+            margin-right: 10px;
+        } */
+
+        .media-contents {
+            flex: 1;
+        }
+
+        .media-contents:first-of-type {
+            margin-right: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="mywebsite">
+        <header>사이트의 윗 부분(header)</header>
+        <nav>
+            <div>사전</div>
+            <div>웹툰</div>
+            <div>메일</div>
+            <div>카페</div>
+            <div>블로그</div>
+        </nav>
+        <main>
+            <div id="newsstand">
+                <article>
+                    <div class="content-header" style="padding:10px 12px;">
+                        <ul>
+                            <li>
+                                <a href="#">뉴스스탠드</a>
+                                <a href="#">언론사편집</a>
+                            </li>
+                            <li>
+                                <a href="#">엔터</a>
+                            </li>
+                            <li>
+                                <a href="#">스포츠</a>
+                            </li>
+                            <li>
+                                <a href="#">경제</a>
+                            </li>
+                            <li>
+                                <a href="#">쇼핑투데이</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content-header-sub">
+                        <div class="content-sub-tab">
+                            <ul>
+                                <li>야구</li>
+                                <li>해외야구</li>
+                                <li>축구</li>
+                                <li>해외축구</li>
+                                <li>농구</li>
+                                <li>배구</li>
+                                <li>N골프</li>
+                                <li>일반</li>
+                                <li>e스포츠</li>
+                                <li>아웃도어</li>
+                            </ul>
+                        </div>
+                        <div class="content-sub-home">
+                            스포츠홈
+                        </div>
+                    </div>
+                    <div class="media-aria">
+                        <div class="media-contents">
+                            <ul>
+                                <li>a</li>
+                                <li>b</li>
+                            </ul>
+                        </div>
+                        <div class="media-contents">
+                            <ul>
+                                <li>대충기사내용1</li>
+                                <li>대충기사내용2</li>
+                                <li>대충기사내용3</li>
+                                <li>대충기사내용4</li>
+                                <li>대충기사내용5</li>
+                                <li>대충기사내용6</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+                <section id="content-paging" style="text-align: center;">
+                    <i class="fa-solid fa-image"></i>
+                    <div style="display: inline-block;">
+                        스포츠 소식 더보기 1/3
+                    </div>
+                    <i class="fa-solid fa-image"></i>
+                </section>
+            </div>
+            <aside>사이드 메뉴</aside>
+        </main>
+        <footer>사이트 아랫 부분</footer>
+    </div>
+</body>
+</html>

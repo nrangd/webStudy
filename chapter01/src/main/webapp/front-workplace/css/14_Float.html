@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14_Float.html</title>
+    <link rel="stylesheet" href="stylesheets/css14.css">
+</head>
+<body>
+    <h3># Float</h3>
+
+    <ul>
+        <li>다른 내용들이 float이 설정된 요소를 비켜가게 만드는 속성</li>
+        <li>float이 설정된 요소는 냇가에 박혀있는 돌 같은 느낌이 된다</li>
+    </ul>
+
+    <h5># float: left</h5>
+    <div class="article">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Dolor facere repellendus quis, veniam aspernatur odio tempora 
+        <img class="article-img float-left" src="images/penguin.jpg" alt="">
+        incidunt possimus cupiditate ipsum eum repudiandae et dolorem quas quidem ullam commodi culpa dignissimos.
+        Quo officiis esse nulla inventore placeat quod non minima dolorem.
+         Enim quod accusantium sequi fugit eligendi nostrum hic quaerat ipsum
+          iste iusto in quisquam dolores, nihil, mollitia, sed dolorum laboriosam?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum facilis, excepturi laudantium saepe ex quas, impedit, veniam unde sed totam deleniti. Illum, sint consequuntur. Error perspiciatis repellendus quae atque doloribus!
+    </div>
+
+    <h5># float: right</h5>
+    <div class="article">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Dolor facere repellendus quis, veniam aspernatur odio tempora 
+        <img class="article-img float-right" src="images/penguin.jpg" alt="">
+        incidunt possimus cupiditate ipsum eum repudiandae et dolorem quas quidem ullam commodi culpa dignissimos.
+        Quo officiis esse nulla inventore placeat quod non minima dolorem.
+         Enim quod accusantium sequi fugit eligendi nostrum hic quaerat ipsum
+          iste iusto in quisquam dolores, nihil, mollitia, sed dolorum laboriosam?
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum facilis, excepturi laudantium saepe ex quas, impedit, veniam unde sed totam deleniti. Illum, sint consequuntur. Error perspiciatis repellendus quae atque doloribus!
+    </div>
+
+    <h5># 컨텐츠의 양이 충분하지 않은 경우 float요소가 박스를 벗어나게된다.</h5>
+    <div class="article">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Dolor facere repellendus quis, veniam aspernatur odio tempora 
+        <img class="article-img float-left" src="images/penguin.jpg" alt="">
+        incidunt possimus cupiditate ipsum eum repudiandae et dolorem quas quidem ullam commodi culpa dignissimos.
+        Quo officiis esse nulla inventore placeat quod non minima dolorem.
+    </div>
+
+    <h5 style = "margin-bottom: 100px;">그러면 어떻게 해야할까?</h5>
+
+
+    <h3># clear 속성 사용하기</h3>
+
+    <ul>
+        <li>clear: left - 해당 요소의 왼쪽에 float 요소가 올 수 없게 만든다</li>
+        <li>clear: right - 해당 요소의 오른쪽에 float 요소가 올 수 없게 만든다</li>
+        <li>clear: both - 해당 요소 양쪽에 float 요소가 올 수 없게 만든다</li>
+    </ul>
+
+    <h5># 컨텐츠의 양이 충분하지 않은 경우 float요소가 박스를 벗어나게된다1
+        (해당 방향 clear를 통해 해결할 수 있다)
+    </h5>
+    <div class="article">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Dolor facere repellendus quis, veniam aspernatur odio tempora 
+        <img class="article-img float-left" src="images/penguin.jpg" alt="">
+        incidunt possimus cupiditate ipsum eum repudiandae et dolorem quas quidem ullam commodi culpa dignissimos.
+        Quo officiis esse nulla inventore placeat quod non minima dolorem.
+        <div style="clear: left;"></div>    
+    </div>
+
+    <h5>
+        # 컨텐츠의 양이 충분하지 않은 경우 float요소가 박스를 벗어나게된다2
+        (float 요소들이 겹치는 것도 clear로 해결할 수 있다)
+    </h5>
+    <div class="article">
+        <img class="article-img float-left" src="images/penguin.jpg" alt="">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Dolor facere repellendus quis, veniam aspernatur odio tempora 
+        <!-- 영역 확인을 위하여 임의로 볼더값을 넣음-->
+        <div style="clear: left; border: 1px solid black; height: 10px;"></div>
+        <img class="article-img float-right" src="images/penguin.jpg" alt="">
+        incidunt possimus cupiditate ipsum eum repudiandae et dolorem quas quidem ullam commodi culpa dignissimos.
+        Quo officiis esse nulla inventore placeat quod non minima dolorem.
+        <div style="clear: right;"></div>
+    </div>
+
+    <h3># float 악용하기</h3>
+
+    <h5># 여러 요소를 같은 방향 float으로 설정하면 쌓을 수 있다.</h5>
+    <div id="float-box1">
+        <img id="float-image1" src="images/apple.jpg">
+        <img id="float-image2" src="images/penguin.jpg">
+        <img id="float-image3" src="images/apple.jpg">
+    </div>
+
+    <h5 style="clear: both;"># 이를 악용하여 float을 통해 원하는 사이트 전체의 레이아웃을 짤 수가 있다.</h5>
+    <div id="float-box2">
+        <div class="float-item2">1</div>
+        <div class="float-item2">2</div>
+        <div class="float-item2">3</div>
+        <div class="float-item2">4</div>
+        <div class="float-item2">5</div>
+    </div>
+
+</body>
+</html>
