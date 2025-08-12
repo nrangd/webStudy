@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	overflow: hidden;
+}
+
+#apple {
+	background-image: url("./apple.jpg");
+	background-size: cover;
+	width: 150px;
+	height: 150px;
+}
+
+#nomore {
+	height: 50px;
+	line-height: 100px;
+	
+}
