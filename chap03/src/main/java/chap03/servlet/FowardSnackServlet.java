@@ -13,10 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 public class FowardSnackServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String price = request.getParameter("price");
+		
 		System.out.printf("ID: %s\nNAME: %s\nPRICE: %s\n",
 				request.getParameter("id"),
 				request.getParameter("name"),
-				request.getParameter("price"));
+				price);
+		
+		// 계산된 결과를 포워드 되는 페이지로 넘기고 싶을 때가 있다
+		Integer saledPrice = (int)(Integer.parseInt(price) * 0.9);
+		
+		// request 에 데이터를 실어놓으면 다음 포워드되는 페이지에서도 이 정보를 활용할 수 있다.
+		request.setAttribute("saledPrice", saledPrice);
 		
 		// 포워드는 내부의 경로를 사용한다 (chap03 아래의 경로)
 		String nextPage;
