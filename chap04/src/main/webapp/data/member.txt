@@ -1,0 +1,3 @@
+[test/1234/penguin.jpg]
+[root/4321/apple.jpg]
+[admin/2222/moki.png]

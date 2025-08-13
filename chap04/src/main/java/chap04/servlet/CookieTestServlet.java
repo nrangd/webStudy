@@ -20,7 +20,7 @@ public class CookieTestServlet extends HttpServlet{
 		System.out.println("ContextPath: " + (contextPath = request.getContextPath()));
 		System.out.println("ServletPath: " + (servletPath = request.getServletPath()));
 		
-		// uri에서 ContextPath를 빼고, servletPath를 빼면 맨 뒤의 *d에 해당하는 원하는 것마 남는다
+		// uri에서 ContextPath를 빼고, servletPath를 빼면 맨 뒤의 *d에 해당하는 원하는 것만 남는다
 		String cmd = uri
 				.substring(servletPath.length())
 				.substring(contextPath.length());
