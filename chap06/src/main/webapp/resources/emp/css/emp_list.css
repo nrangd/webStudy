@@ -1,0 +1,21 @@
+.table {
+			width: fit-content;
+}
+.row {
+	display: flex;
+    border-bottom: 1px solid beige;
+    background-color: antiquewhite;
+}	
+
+.row.header {
+	font-weight: bold;
+	background-color: coral;
+}
+
+.row > div {
+	width: 150px;
+}
+
+.row > div.phone_number {
+	width: 200px;
+}

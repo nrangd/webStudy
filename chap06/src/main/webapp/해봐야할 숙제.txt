@@ -1,0 +1,6 @@
+
+(1) URI가 /employee/list 일때 employees의 모든 목록이 조회되게 만들기
+(2) URI가 /department/list 일때 departments의 모든 목록이 조회되게 만들기
+(3) URI가 /job/list 일때 jobs의 모든 목록이 조회되게 만들기
+
+department 부서도 해보기
