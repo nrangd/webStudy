@@ -1,6 +1,7 @@
 package chap06.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,9 +16,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import chap06.dao.DepartmentDAO;
 import chap06.dao.EmployeeDAO;
+import chap06.dao.JobDAO;
 import chap06.dao.OjdbcConnector;
+import chap06.dto.Department;
 import chap06.dto.Employee;
+import chap06.dto.Job;
 
 public class ForwardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -46,31 +51,72 @@ public class ForwardServlet extends HttpServlet {
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		// # ForwardServlet의 모든 요청에 대한 처리 절차
 		
 		// 1. 일단 uri를 확인 (어떤 DB에서 꺼낼지, 어디로 포워드 할지 결정됨)
-		
+
 		// 2. DB에서 데이터를 꺼냄 (하고 싶은 처리를 함, 비즈니스 로직)
 		
 		// 3. 꺼낸 데이터를 실어놓음
 		
 		// 4. 포워드
 		
+		String uri= request.getRequestURI();
+		uri = uri.substring(request.getContextPath().length(), uri.length());
+		System.out.println(uri);
+		
+		if(uri.equals("/employee/list")) {
+			EmployeeDAO employeeDao = new EmployeeDAO(conn);
+			
+			List<Employee> empList = employeeDao.getAll();
+			
+			System.out.println(empList);
+			
+			request.setAttribute("employees", empList);
+			
+			request
+				.getRequestDispatcher("/WEB-INF/views/emp/emp_list.jsp")
+				.forward(request, response);
+		} else if(uri.equals("/department/list")) {
+			DepartmentDAO departmentDAO = new DepartmentDAO(conn);
+			
+			List<Department> depList = departmentDAO.getAll();
+			
+			System.out.println(depList);
+			
+			request.setAttribute("department", depList);
+			
+			request.getRequestDispatcher("/WEB-INF/views/list/dep_list.jsp").forward(request, response);
+		} else if(uri.equals("/job/list")) {	
+			JobDAO jobDao = new JobDAO(conn);
+			
+			List<Job> jobList = jobDao.getAll();
+			
+			System.out.println(jobList);
+			
+			request.setAttribute("job", jobList);
+			
+			request.getRequestDispatcher("/WEB-INF/views/list/job_list.jsp").forward(request, response);
+		} else {
+			PrintWriter out = response.getWriter();
+			out.print("<html><head></head><body>존재하지 않는 페이지</body></html>");
+		}
 		
 		// 이곳에 접속하면 DB로부터 모든 사원들을 꺼내서 콘솔에 출력해보세요
 		
-		EmployeeDAO employeeDao = new EmployeeDAO(conn);
-		
-		List<Employee> empList = employeeDao.getAll();
-		
-		System.out.println(empList);
-		
-		request.setAttribute("employees", empList);
-		
-		request
-			.getRequestDispatcher("/WEB-INF/views/emp/emp_list.jsp")
-			.forward(request, response);
+//		EmployeeDAO employeeDao = new EmployeeDAO(conn);
+//		
+//		List<Employee> empList = employeeDao.getAll();
+//		
+//		System.out.println(empList);
+//		
+//		request.setAttribute("employees", empList);
+//		
+//		request
+//			.getRequestDispatcher("/WEB-INF/views/emp/emp_list.jsp")
+//			.forward(request, response);
 		
 	/*
 		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE", "hr", "1234")){
