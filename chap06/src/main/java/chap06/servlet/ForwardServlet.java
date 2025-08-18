@@ -3,9 +3,11 @@ package chap06.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -52,8 +54,6 @@ public class ForwardServlet extends HttpServlet {
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
 		// # ForwardServlet의 모든 요청에 대한 처리 절차
 		
 		// 1. 일단 uri를 확인 (어떤 DB에서 꺼낼지, 어디로 포워드 할지 결정됨)
@@ -65,6 +65,8 @@ public class ForwardServlet extends HttpServlet {
 		// 4. 포워드
 		
 		String contextPath = request.getContextPath();
+		
+		String method = request.getMethod();
 		
 		String uri= request.getRequestURI();
 		uri = uri.substring(contextPath.length(), uri.length());
@@ -113,9 +115,42 @@ public class ForwardServlet extends HttpServlet {
 			request.setAttribute("cloth", clothes);
 			// request에 실린 데이터와 함께 jsp파일로 포워드를 해준다
 			request.getRequestDispatcher("/WEB-INF/views/list/cloth_list.jsp").forward(request, response);
+		} else if(uri.equals("/cloth/add")) {
+			if(method.equals("GET")) {
+				// GET일떄는 새 상품을 등록하는 폼으로 이동
+				request
+				.getRequestDispatcher("/WEB-INF/views/list/add.jsp")
+				.forward(request, response);
+			} else if (method.equals("POST")) {
+				// POST일때는 폼에서 전달받은 데이터를 통해 DB에 등록하고 목록으로 이동
+				ClothDAO dao = new ClothDAO(conn);
+				
+				// input에서 날짜를 전달받는 경우
+				String release_date = request.getParameter("release_date");
+				LocalDate ld = LocalDate.parse(release_date);
+				Date d = Date.valueOf(ld);
+				
+				System.out.println("release_date: " + release_date);
+				
+				request.setCharacterEncoding("UTF-8");
+				// 원래 파라미터를 가져올때 NULL 체크를 해야함
+				Cloth dto = new Cloth(
+						request.getParameter("cloth_part"),
+						request.getParameter("cloth_brand"),
+						Integer.parseInt(request.getParameter("cloth_price")),
+						request.getParameter("cloth_size"),
+						null // ID는 시퀀스로 추가
+						);
+				
+				dao.insert(dto);
+				response.sendRedirect("./list");
+				// dao.insert();
+			}
+			
 		} else if(uri.equals("/index")) {
 			request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 		} else {
+			System.out.println("없는주소로 이동중"+uri);
 			response.sendRedirect(contextPath+"/index");
 		}
 		
@@ -172,7 +207,7 @@ public class ForwardServlet extends HttpServlet {
 	public void destroy() {
 		try {
 			if(conn != null) {
-				conn.close();				
+				conn.close();
 			}
 			System.out.println("DB연결 해제");
 		} catch (SQLException e) {

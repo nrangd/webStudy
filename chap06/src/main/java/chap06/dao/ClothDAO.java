@@ -46,4 +46,21 @@ public class ClothDAO {
 		}
 		
 	}
+	
+	public int insert(Cloth cloth) {
+		String sql = "INSERT INTO "
+				+ "cloth(cloth_id, cloth_part, cloth_brand, cloth_price, cloth_size) "
+				+ "VALUES(cloth_seq.nextval, ?, ?, ?, ?)";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, cloth.getCloth_part());
+			pstmt.setString(2, cloth.getCloth_brand());
+			pstmt.setInt(3, cloth.getCloth_price());
+			pstmt.setString(4, cloth.getCloth_size());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 1;
+	}
 }

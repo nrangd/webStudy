@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="java.util.List, chap06.dto.Cloth"%>
 <%
 	List<Cloth> clothes= (List<Cloth>) request.getAttribute("cloth");
-	
+	String contextPath = request.getContextPath();
 	System.out.println("jsp에서 받은 clothes: " + clothes);
 %>
 <!DOCTYPE html>
@@ -40,5 +40,9 @@
 			비어있음
 		<%} %>
 	</div>
+	
+	<button id="add_btn">새 상품 추가하기</button>
+	
+	<script src="<%=contextPath%>/resources/cloth/js/cloth_list.js"> </script>
 </body>
 </html>
