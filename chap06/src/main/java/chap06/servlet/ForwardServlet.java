@@ -3,7 +3,6 @@ package chap06.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,10 +15,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import chap06.dao.ClothDAO;
 import chap06.dao.DepartmentDAO;
 import chap06.dao.EmployeeDAO;
 import chap06.dao.JobDAO;
 import chap06.dao.OjdbcConnector;
+import chap06.dto.Cloth;
 import chap06.dto.Department;
 import chap06.dto.Employee;
 import chap06.dto.Job;
@@ -63,8 +64,10 @@ public class ForwardServlet extends HttpServlet {
 		
 		// 4. 포워드
 		
+		String contextPath = request.getContextPath();
+		
 		String uri= request.getRequestURI();
-		uri = uri.substring(request.getContextPath().length(), uri.length());
+		uri = uri.substring(contextPath.length(), uri.length());
 		System.out.println(uri);
 		
 		if(uri.equals("/employee/list")) {
@@ -79,7 +82,7 @@ public class ForwardServlet extends HttpServlet {
 			request
 				.getRequestDispatcher("/WEB-INF/views/emp/emp_list.jsp")
 				.forward(request, response);
-		} else if(uri.equals("/department/list")) {
+		} else if (uri.equals("/department/list")) {
 			DepartmentDAO departmentDAO = new DepartmentDAO(conn);
 			
 			List<Department> depList = departmentDAO.getAll();
@@ -89,7 +92,7 @@ public class ForwardServlet extends HttpServlet {
 			request.setAttribute("department", depList);
 			
 			request.getRequestDispatcher("/WEB-INF/views/list/dep_list.jsp").forward(request, response);
-		} else if(uri.equals("/job/list")) {	
+		} else if (uri.equals("/job/list")) {	
 			JobDAO jobDao = new JobDAO(conn);
 			
 			List<Job> jobList = jobDao.getAll();
@@ -99,10 +102,27 @@ public class ForwardServlet extends HttpServlet {
 			request.setAttribute("job", jobList);
 			
 			request.getRequestDispatcher("/WEB-INF/views/list/job_list.jsp").forward(request, response);
+		} else if (uri.equals("/cloth/list")) {
+			
+			// db에서 옷장 데이터들을 챙겨와서 List에 넣는다.
+			ClothDAO clothDao = new ClothDAO(conn);
+			List<Cloth> clothes= clothDao.getAll();
+			System.out.println(clothes);
+			
+			// list에 넣어진 옷장 데이터를 request의 어트리뷰트에 저장해둔다.
+			request.setAttribute("cloth", clothes);
+			// request에 실린 데이터와 함께 jsp파일로 포워드를 해준다
+			request.getRequestDispatcher("/WEB-INF/views/list/cloth_list.jsp").forward(request, response);
+		} else if(uri.equals("/index")) {
+			request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 		} else {
-			PrintWriter out = response.getWriter();
-			out.print("<html><head></head><body>존재하지 않는 페이지</body></html>");
+			response.sendRedirect(contextPath+"/index");
 		}
+		
+//		} else {
+//			PrintWriter out = response.getWriter();
+//			out.print("<html><head></head><body>존재하지 않는 페이지</body></html>");
+//		}
 		
 		// 이곳에 접속하면 DB로부터 모든 사원들을 꺼내서 콘솔에 출력해보세요
 		
@@ -146,5 +166,17 @@ public class ForwardServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	*/
+	}
+	
+	@Override
+	public void destroy() {
+		try {
+			if(conn != null) {
+				conn.close();				
+			}
+			System.out.println("DB연결 해제");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

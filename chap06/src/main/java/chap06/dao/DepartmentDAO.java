@@ -25,10 +25,11 @@ public class DepartmentDAO {
 			
 			while(rs.next()) {
 				list.add(new Department(
-						rs.getInt(0), 
-						rs.getString(1), 
-						rs.getInt(2), 
-						rs.getInt(3)));
+						rs.getInt("department_id"), 
+						rs.getString("department_name"), 
+						rs.getInt("manager_id"), 
+						rs.getInt("location_id")));
+				System.out.println(rs.getInt("manager_id"));
 			}
 			
 			return list;

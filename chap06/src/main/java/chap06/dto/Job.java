@@ -1,22 +1,22 @@
 package chap06.dto;
 
 public class Job {
-	Integer job_id;
+	String job_id;
 	String job_title;
 	Integer min_salary;
 	Integer max_salary;
 	
-	public Job(Integer job_id, String job_title, Integer min_salary, Integer max_salary) {
+	public Job(String job_id, String job_title, Integer min_salary, Integer max_salary) {
 		super();
 		this.job_id = job_id;
 		this.job_title = job_title;
 		this.min_salary = min_salary;
 		this.max_salary = max_salary;
 	}
-	public Integer getJob_id() {
+	public String getJob_id() {
 		return job_id;
 	}
-	public void setJob_id(Integer job_id) {
+	public void setJob_id(String job_id) {
 		this.job_id = job_id;
 	}
 	public String getJob_title() {

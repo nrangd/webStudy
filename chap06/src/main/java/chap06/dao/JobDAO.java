@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import chap06.dto.Department;
 import chap06.dto.Job;
 
 public class JobDAO {
@@ -19,17 +18,17 @@ Connection conn;
 	
 	public List<Job> getAll() {
 		
-		
 		try (PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM jobs");
-				ResultSet rs = pstmt.executeQuery()){
+				ResultSet rs = pstmt.executeQuery()) {
 			ArrayList<Job> list = new ArrayList<>();
 			
 			while(rs.next()) {
+				
 				list.add(new Job(
-						rs.getInt(0), 
-						rs.getString(1), 
-						rs.getInt(2), 
-						rs.getInt(3)));
+						rs.getString("job_id"),
+						rs.getString("job_title"),
+						rs.getInt("min_salary"),
+						rs.getInt("max_salary")));
 			}
 			
 			return list;
