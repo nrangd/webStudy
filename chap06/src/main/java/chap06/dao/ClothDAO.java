@@ -63,4 +63,59 @@ public class ClothDAO {
 		}
 		return 1;
 	}
+	
+	public Cloth get(int cloth_id) {
+		String sql = "SELECT * FROM cloth WHERE cloth_id = ?";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setInt(1, cloth_id);
+
+			try (ResultSet rs = pstmt.executeQuery();){
+				rs.next();
+				
+				return new Cloth(
+							rs.getString(1),
+							rs.getString(2),
+							rs.getInt(3),
+							rs.getString(4),
+							cloth_id
+						);
+			}
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public int update(Cloth cloth) {
+		String sql = "UPDATE cloth SET "
+				+ "cloth_part = ?, cloth_brand = ?, cloth_size = ?, cloth_price = ? WHERE cloth_id = ?";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);){
+			pstmt.setString(1, cloth.getCloth_part());
+			pstmt.setString(2, cloth.getCloth_brand());
+			pstmt.setString(3, cloth.getCloth_size());
+			pstmt.setInt(4, cloth.getCloth_price());
+			pstmt.setInt(5, cloth.getCloth_id());
+			
+			int updated_row = pstmt.executeUpdate();
+			
+			return updated_row > 0 ? cloth.getCloth_id() : -1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	public int delete(int id) {
+		String sql = "DELETE FROM cloth WHERE cloth_id = ?";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);){
+			pstmt.setInt(1, id);
+			int result = pstmt.executeUpdate();
+			
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
 }

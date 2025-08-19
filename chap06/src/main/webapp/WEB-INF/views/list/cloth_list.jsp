@@ -28,7 +28,12 @@
 			
 			<% for(Cloth cl : clothes) {%>
 				<div class="row">
-					<div><%=cl.getCloth_part() %></div>
+					<div>
+						<a href="./detail?cloth_id=<%= cl.getCloth_id() %>">
+							<%=cl.getCloth_part() %>
+						</a>
+					</div>
+					
 					<div><%=cl.getCloth_brand() %></div>
 					<div><%=cl.getCloth_price() %></div>
 					<div><%=cl.getCloth_size() %></div>

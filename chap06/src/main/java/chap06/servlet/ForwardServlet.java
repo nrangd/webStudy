@@ -35,6 +35,7 @@ public class ForwardServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		ServletContext application = config.getServletContext();
+		application.setAttribute("CLOTH_SIZES", new String[] {"XXXL","XXL","XL","L","M","S","XS","XXS","FREE"});
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -126,11 +127,11 @@ public class ForwardServlet extends HttpServlet {
 				ClothDAO dao = new ClothDAO(conn);
 				
 				// input에서 날짜를 전달받는 경우
-				String release_date = request.getParameter("release_date");
-				LocalDate ld = LocalDate.parse(release_date);
-				Date d = Date.valueOf(ld);
-				
-				System.out.println("release_date: " + release_date);
+//				String release_date = request.getParameter("release_date");
+//				LocalDate ld = LocalDate.parse(release_date);
+//				Date d = Date.valueOf(ld);
+//				
+//				System.out.println("release_date: " + release_date);
 				
 				request.setCharacterEncoding("UTF-8");
 				// 원래 파라미터를 가져올때 NULL 체크를 해야함
@@ -147,6 +148,54 @@ public class ForwardServlet extends HttpServlet {
 				// dao.insert();
 			}
 			
+		} else if(uri.equals("/cloth/detail")) {
+			// ID로 상품 하나를 DB에서 조회한 후 알맞은 뷰 페이지로 포워드
+			ClothDAO dao = new ClothDAO(conn);
+			
+			Integer cloth_id = Integer.parseInt(request.getParameter("cloth_id"));
+			Cloth cloth = dao.get(cloth_id);
+			
+			System.out.println("조회된 옷: " + cloth);
+			
+			request.setAttribute("cloth", cloth);
+			
+			request.getRequestDispatcher("/WEB-INF/views/list/detail.jsp").forward(request, response);
+		} else if(uri.equals("/cloth/modify")) {
+			if (method.equals("GET")) {
+				ClothDAO dao = new ClothDAO(conn);
+				Integer cloth_id = Integer.parseInt(request.getParameter("cloth_id"));
+				Cloth cloth = dao.get(cloth_id);
+				
+				request.setAttribute("cloth", cloth);
+				request.getRequestDispatcher("/WEB-INF/views/list/modify.jsp").forward(request, response);
+			} else if(method.equals("POST")) {
+				// 받은 정보를 DB에 반영하고 상세정보 페이지로 리다이렉트
+				ClothDAO dao = new ClothDAO(conn);
+				
+				int pk = dao.update(new Cloth(
+						request.getParameter("cloth_part"),
+						request.getParameter("cloth_brand"),
+						Integer.parseInt(request.getParameter("cloth_price")),
+						request.getParameter("cloth_size"),
+						Integer.parseInt(request.getParameter("cloth_id"))
+						));
+				if(pk < 0) {
+					System.out.println("DB테이블 수정 실패");
+				}
+				
+				response.sendRedirect(contextPath + "/cloth/detail?cloth_id=" + pk);
+			}
+		} else if(uri.equals("/cloth/delete")) {
+			ClothDAO dao = new ClothDAO(conn);
+			
+			if(request.getParameter("cloth_id") != null) {
+				int id = Integer.parseInt(request.getParameter("cloth_id"));
+				dao.delete(id);
+			} else {
+				System.out.println("/cloth/detail에서 넘어온 파라미터가 NULL임");
+			}
+			
+			response.sendRedirect("./list");
 		} else if(uri.equals("/index")) {
 			request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 		} else {
