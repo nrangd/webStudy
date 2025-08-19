@@ -57,5 +57,12 @@
 		<% } %>
 		<button id="data_add_btn">데이터 추가하기</button>
 	</div>
+	
+	<script type="text/javascript">
+		const btn = document.getElementById('data_add_btn');
+		btn.addEventListener('click', (e) => {
+			location.href='./add';
+		});
+	</script>
 </body>
 </html>

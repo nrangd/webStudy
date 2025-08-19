@@ -40,17 +40,26 @@ public class FowardServlet extends HttpServlet {
 		String contextPath = request.getContextPath();
 		
 		String uri = request.getRequestURI().substring(contextPath.length());
+		String method = request.getMethod();
+				
+		SomethingDAO dao = new SomethingDAO(conn);
 		
 		System.out.println(uri);
 		
-		if(uri.equals("/something")) {
+		if(uri.equals("/something/list")) {
 			// 디비에서 정보를 가져오고
-			List<Something> list = new SomethingDAO(conn).getAll();
+			List<Something> list = dao.getAll();
 			// request의 어트리뷰트에 저장해두고
 			request.setAttribute("something", list);
-			
 			// forward시킨후 새 페이지(jsp)에서 저장한 내용을 불러서 쓸거다
 			request.getRequestDispatcher("/WEB-INF/views/list/something.jsp").forward(request, response);
+		} else if(uri.equals("/something/add")) {
+			if(method.equals("GET")) {
+				request.getRequestDispatcher("/WEB-INF/views/list/add.jsp").forward(request, response);				
+			} else if(method.equals("POST")) {
+				
+				request.getRequestDispatcher("/WEB-INF/views/list/something.jsp").forward(request, response);
+			}
 		} else if (uri.equals("/index")) {
 			request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		} else {
