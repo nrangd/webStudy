@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.List, dbListTest2.dto.BBS"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	List<BBS> list = null;
 	if(request.getAttribute("bbs_list") != null) {
@@ -14,13 +15,16 @@
 	<meta charset="UTF-8">
 	<title>게시판 리스트 페이지</title>
 	<style type="text/css">
+		.table {
+			width: fit-content;
+			background-color: antiquewhite;
+		}
 		.header {
 			background-color: coral;
 		}
 		.row {
 			display: flex;
 			width: fit-content;
-			background-color: antiquewhite;
 			border-bottom: 1px solid beige;
 		}
 		.row > div {
@@ -40,8 +44,7 @@ BBS_ID NUMBER NOT NULL
 , BBS_KEYWORD VARCHAR2(20)
 
  -->
-
-	<div id="list">
+	<div class="table">
 		<div class="row header">
 			<div>번호</div>
 			<div>제목</div>
@@ -49,6 +52,9 @@ BBS_ID NUMBER NOT NULL
 			<div>등록예약날짜</div>
 			<div>분류탭</div>
 		</div>
+		
+		<%--
+		
 		<% if(list.size() != 0) { %>
 			<% for (BBS bbs : list) { %>
 				<div class="row">
@@ -64,6 +70,28 @@ BBS_ID NUMBER NOT NULL
 		<% } else {%>
 			<div>테이블을 불러오는데 문제가생김</div>
 		<% } %>
+		
+		 --%>
+		
+		<c:choose>
+			<c:when test="${bbs_list.size() != 0}">
+				<c:forEach items="${bbs_list}" var="bbs">
+					<div class="row">
+						<div>${bbs.getBbs_number()}</div>
+						<div>${bbs.getBbs_subject()}</div>
+						<div>${bbs.getBbs_regist_date()}</div>
+						<div>${bbs.getBbs_reservation_date()}</div>
+						<div>${bbs.getBbs_keyword()}</div>
+					</div>
+				</c:forEach>
+			</c:when>
+			<c:when test="${bbs_list.size() == 0 }">
+				<div>비어있음</div>
+			</c:when>
+			<c:otherwise>
+				<div>테이블을 불러오는데 문제가생김 (어트리뷰트값이 null임)</div>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<button id="add-btn">추가하기</button>
 	

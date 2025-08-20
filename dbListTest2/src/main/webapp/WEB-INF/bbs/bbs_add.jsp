@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String[] KEYWORDS= (String[]) application.getAttribute("KEYWORDS");
 %>
@@ -23,19 +24,28 @@ BBS_ID NUMBER NOT NULL
 
  -->
 
-	<form id="f"></form>
+	<form id="f" method="POST"></form>
 	제목 : 
 	<input type="text" form="f" name="bbs_subject"> <br>
 	분류 : 
 	<select form="f" name="bbs_keyword">
-		<% for (String key : KEYWORDS) { %>
+		<%-- <% for (String key : KEYWORDS) { %>
 			<option value="key"><%=key %></option>
-		<% } %>
+		<% } %> --%>
+		<c:forEach items="${KEYWORDS}" var="key">
+			<option value="key">${key }</option>
+		</c:forEach>
 	</select> <br>
 	예약날짜 
 	<input type="date" form="f" name="bbs_reservation_date"> <br>
 	<textarea rows="30" cols="70" form="f" name="bbs_content"></textarea> <br>
 	<button id="add-btn">등록하기</button>
 	
+	<script type="text/javascript">
+		const add_btn = document.getElementById('add-btn');
+		add_btn.addEventlistener('click', (e) => {
+			location.href="./add";
+		});
+	</script>
 </body>
 </html>
