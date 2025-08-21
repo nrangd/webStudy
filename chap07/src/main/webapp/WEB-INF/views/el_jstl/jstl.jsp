@@ -10,7 +10,8 @@
 <body>
 
 	<div>
-		<a href="./home">홈으로 가기</a>
+		<a href="./home">홈으로 가기</a> <br>
+		my_value = ${my_value} <br>
 	</div>
 
 	<h3># JSTL core</h3>

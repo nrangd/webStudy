@@ -33,4 +33,32 @@
   	<servlet-name>frontController</servlet-name>
   	<url-pattern>/</url-pattern>
   </servlet-mapping>
+  
+  <filter>
+  	<filter-name>myFilter1</filter-name>
+  	<filter-class>shark.filter.MyFilter1</filter-class>
+  	<init-param>
+  		<param-name>initValue</param-name>
+  		<param-value>10</param-value>
+  	</init-param>
+  </filter>
+  
+  <filter>
+  	<filter-name>encodingFilter</filter-name>
+  	<filter-class>shark.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>encodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>myFilter1</filter-name>
+  	<url-pattern>/el_jstl/jstl</url-pattern>
+  </filter-mapping>
 </web-app>
