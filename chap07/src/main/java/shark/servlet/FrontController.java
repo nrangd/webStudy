@@ -28,7 +28,7 @@ public class FrontController extends HttpServlet{
 		cmd_mapper.put("/el_jstl/jstl", new JstlTestProcess());
 		cmd_mapper.put("/el_jstl/home", new JstlHomeProcess());
 		cmd_mapper.put("/filter/", new FilterIndexProcess());
-		
+		cmd_mapper.put("/listener/", new ListenerIndexProcess());
 	}
 	
 	@Override

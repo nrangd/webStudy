@@ -52,6 +52,8 @@
   	</init-param>
   </filter>
   
+  <!-- 필터 추가하는 곳 -->
+  
   <filter-mapping>
   	<filter-name>encodingFilter</filter-name>
   	<url-pattern>/*</url-pattern>
@@ -61,4 +63,19 @@
   	<filter-name>myFilter1</filter-name>
   	<url-pattern>/el_jstl/jstl</url-pattern>
   </filter-mapping>
+  
+  <!-- 리스너 추가하는 곳 -->
+  
+  <listener>
+  	<listener-class>shark.listener.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <listener>
+   	<listener-class>shark.listener.ContextAttributeListener</listener-class>
+  </listener>
+  
+  <context-param>
+  	<param-name>db_url</param-name>
+  	<param-value>jdbc:oracle:thin://localhost:1521:XE</param-value>
+  </context-param>
 </web-app>
