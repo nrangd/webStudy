@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+}
+
+#main {
+	padding: 0;
+	width: 1000px;
+	font-size: 30px;
+	background-color: green;
+}
+
+#header {
+	height: 200px;
+	background-color: darked;
+	padding: 30px;
+	position: relative;
+}
+
+#logo {
+	background-color: white;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	right: 30px;
+	bottom: 30px;
+	font-size: 12px;
+	color: black;
+}
+
+#nav {
+	height: 150px;
+	background-color: black;
+	padding: 10px 30px;
+	color: white;
+	display: flex;
+}
+
+#nav > div {
+	background-color: white;
+	color: black;
+	font-size: 12px;
+	width: 100px;
+}
+
+#content {
+	height: 800px;
+	background-color: tomato;
+	padding: 30px
+}
+
+#footer {
+	height: 150px;
+	background-color: darkgray;
+	padding: 30px
+}
