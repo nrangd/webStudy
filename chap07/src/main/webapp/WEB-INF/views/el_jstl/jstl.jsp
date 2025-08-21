@@ -8,6 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<div>
+		<a href="./home">홈으로 가기</a>
+	</div>
+
 	<h3># JSTL core</h3>
 	
 	<ul>
