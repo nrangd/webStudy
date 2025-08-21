@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -12,9 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import dbListTest2.dao.BBSDAO;
-import dbListTest2.dto.BBS;
 
 public class ForwardServlet extends HttpServlet{
 	Connection conn;
@@ -55,7 +51,14 @@ public class ForwardServlet extends HttpServlet{
 		// 메서드(함수아님)를 변수에 담아둔다
 		String method = request.getMethod();
 		
+		
+		// 다형성을 활용해서 다시 만들어보자
+		
+		
+		
 		// uri에 담긴 변수에 따라 분기분(if)으로 어디로 가는지 정해준다
+		
+		/*
 		if(uri.equals("/404")) {
 		// 페이지를 잘못 찾아왔을때 오는곳
 		// index.jsp로 온다
@@ -99,6 +102,7 @@ public class ForwardServlet extends HttpServlet{
 			response.sendRedirect(contextPath + "/404");
 			System.out.println("유저가 접속시도한 uri : " + uri);
 		}
+		*/
 	}
 	
 	@Override
@@ -106,5 +110,10 @@ public class ForwardServlet extends HttpServlet{
 		// 포워드 서블릿이 사라질때 같이 끝내야할것들
 		// db연결 닫기
 		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
