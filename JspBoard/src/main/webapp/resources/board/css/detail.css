@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.subject {
+	display: flex;
+}
+
+.subject > div {
+	width: 150px;
+}
